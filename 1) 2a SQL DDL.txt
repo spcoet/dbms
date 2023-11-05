@@ -1,0 +1,44 @@
+1) 2a SQL DDL - Table, view, index, sequence ,synonym, constraints
+
+create database info;
+use info;
+
+create table employee(eid int, ename varchar(20), esalary int, eaddress varchar(20));
+ desc employee;
+
+insert into employee(eid,ename,esalary,eaddress) values (1,'adi',30000,'baramati'), (2,'kiran',50000,'pune'), (3,'samir',10000,'nira'), (4,'raj',20000,'satara');
+select * from employee;
+
+alter table employee add eDOB date; 
+select * from employee;
+
+alter table employee drop column eDOB;
+select * from employee;
+ 
+alter table employee rename to employee_data; 
+select * from employee_data;
+
+create table student_data(srollno int,sname varchar(20),ssubject varchar(20),saddress varchar(20),smarks int);
+
+insert into student_data(srollno,sname,ssubject,saddress,smarks)values(1,'onkar','DBMS','nira',56), (2,'Aditya','SPOS','pune',70),(3,'ram','SQL','nashik',55);
+
+create view v1 as select srollno,sname,ename,esalary from employee_data,student_data;
+select * from v1;
+
+update v1 set sname='sham' where srollno=3; 
+select * from student_data;
+
+create index ind1 on employee_data(eid); 
+show index from employee_data;
+
+drop index ind1 on employee_data; 
+create unique index ind2 on employee_data(ename); 
+show index from employee_data;
+
+create table te(roll_no int auto_increment, primary key(roll_no), name varchar(10));
+after table te auto_increment=1;
+
+insert into te(name) values('kiran'),('raj'),('adi');
+select * from te;
+
+
