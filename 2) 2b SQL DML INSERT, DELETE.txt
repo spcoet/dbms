@@ -1,0 +1,63 @@
+2) 2b SQL DML INSERT, DELETE , select, update
+
+use library;
+create table lib(id int,name varchar(20),purpose varchar(20)); 
+insert into lib(id,name,purpose) values (1,'SAMIR','book'), (2,'ONKAR','internet'), (3,'RAJ','bookreturn'); 
+select *from lib; 
+
+alter table lib add class varchar(10); 
+select *from lib; 
+
+update lib set class='TE' where id=1; 
+update lib set class='TE' where id=2; 
+update lib set class='TE' where id=3;
+ select *from lib; 
+select*from lib where id<4; 
+select*from lib where id in(1,3); 
+select*from lib where id in(1,2);
+select distinct(class)from lib;
+
+alter table lib add bookname varchar(10); 
+select*from lib;
+
+insert into lib(id,name,purpose,class,bookname)values(3,'kiran','internet','BE','c'), (4,'ram','checker','SE','DBMS');
+select*from lib;
+
+update lib set bookname='CPP' where id=3; 
+update lib set bookname='JAVA' where id=2; 
+update lib set bookname='SQL' where id=1; 
+select*from lib;
+select*from lib where id between 1 and 4;
+select*from lib where id not between 3 and 4;
+select min(id)from lib;
+select sum(id)from lib;
+select count(name)from lib;
+
+create table college(id int,name varchar(10),class varchar(10)); 
+insert into lib(id,name,class)values(5,'ram','BE'),(6,'rana','FE'),(7,'sham','SE'); 
+select*from lib;
+
+insert into college(id,name,class)values(5,'ram','BE'),(6,'rana','FE'),(7,'sham','SE'); 
+select*from college;
+select class from college union select class from lib;
+select name from college union all select name from lib;
+select class from college union all select class from lib;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
