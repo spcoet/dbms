@@ -1,0 +1,38 @@
+4) BORROWER & FINE PL/SQL
+ PL/SQL control structure exception handling
+
+
+create table borrower1(roll number(5),name varchar(10),dateofissue date,bookname varchar(10),status varchar(5));
+
+insert into borrower1 values(1,'vaishnavi','4-AUG-2020','DM','I');
+insert into borrower1 values(2,'om','4-JUL-2020','DMS','I');
+insert into borrower1 values(3,'sanika','14-JUL-2020','DMg','I');
+insert into borrower1 values(4,'kavita','4-JAN-2020','DM4','I');
+select * from borrower1;
+
+create table fine2(roll number(5),sdate date,amt number(5));
+SQL> declare
+ rno number:=&roll;
+ bname varchar(10):='&name';
+ no_days number;
+ issuedate date;
+ fineamt number:=0;
+ begin
+ select dateofissue into issuedate from borrower1 where roll=rno;
+ select (sysdate-issuedate) into no_days from dual;
+ if(no_days >= 15 and no_days <= 30)then
+ fineamt:=no_days*5;
+ elsif no_days>30 then
+ fineamt:=no_days*50;
+ end if;
+ update borrower1 set status='R' where roll=rno;
+ if fineamt>=0 then
+ insert into fine2 values(rno,sysdate,fineamt);
+ end if;
+ exception
+ when no_data_found then
+ dbms_output.put_line('Record not found');
+ end;
+  /
+
+select * from fine2;

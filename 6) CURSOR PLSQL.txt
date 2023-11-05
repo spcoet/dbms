@@ -1,0 +1,40 @@
+6) CURSOR PL/SQL
+
+create table oldrollcall (roll_no number, name varchar2(12));
+insert into oldrollcall values (1,'madhuri'); 
+insert into oldrollcall values (2,'sudha'); 
+insert into oldrollcall values (3,'suhani'); 
+
+create table newrollcall(rollno number, name varchar2(12));
+insert into newrollcall values(3,'sayali');     
+insert into newrollcall values(4,'sushma');  
+insert into newrollcall values(5,'mira');   
+ 
+select* from oldrollcall; 
+select* from newrollcall;
+
+declare
+cursor cur1 is
+select roll_no, name from oldrollcall;
+cursor cur2 is
+select roll_no from newrollcall;
+r number(5)
+;
+rno number(5);
+nm varchar2(10);
+begin
+open cur1;
+open cur2;
+loop
+fetch cur1 into rno,nm;
+fetch cur2 into r;
+exit when cur1%found=false;
+if r<>rno then
+insert into newrollcall values(rno,nm);
+end if;
+end loop;
+close cur1;
+end;
+/
+
+select * from newrollcall;

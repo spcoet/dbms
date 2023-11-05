@@ -1,0 +1,15 @@
+10) MapReduce operation mongodb
+
+db.createCollection("order")
+
+db.order.insert({id:4, name:'sayali', amount:5000,status:'A'})
+db.order.insert({id:1, name:'yash', amount:5000,status:'A'})
+db.order.insert({id:1, name:'yash', amount:35000,status:'A'})
+db.order.insert({id:2, name:'yogita', amount:3000,status:'A'})
+db.order.insert({id:2, name:'yogita', amount:30000,status:'A'})
+db.order.insert({id:3, name:'madhuri', amount:30000,status:'D'})
+db.order.find().pretty()
+
+db.order.mapReduce(function(){emit(this.id, this.amount);}, function(key, values){return 
+     Array.sum(values)}, {query:{status:"A"}, out:"final"})
+db.final.find().pretty()

@@ -1,0 +1,19 @@
+8) mongodb  CRUD operation
+
+use te;
+
+db.createCollection("employee")
+db.employee.insert({emp_id:101, name:'smith', job:'manager', salary:30000})
+db.employee.insert({emp_id:102, name:'jon', job:'designer', salary:50000})
+db.employee.insert({emp_id:103, name:'merry', job:'DBA', salary:60000})
+db.employee.insert({emp_id:104, name:'gita', job:'secretary', salary:60000})
+db.employee.find().pretty()
+
+db.employee.remove({emp_id:104})
+db.employee.find().pretty()
+
+db.employee.update({emp_id:101, name:'smith'}, {$set: {emp_id:104, name:'sita'} })
+db.employee.find().pretty()
+
+db.employee.find({$and: [{'emp_id':'104', 'name':'sita'}]}).pretty()
+db.employee.find({$or: [{'emp_id':'104', 'name':'sita'}]}).pretty()

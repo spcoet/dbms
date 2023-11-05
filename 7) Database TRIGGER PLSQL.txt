@@ -1,0 +1,31 @@
+7) Database TRIGGER PL/SQL
+
+create table lib1(bno number(10), bname varchar2(10), author varchar2(10),allowed_days number(10));
+
+insert into lib1 values(1,'java', 'mr.jagtap',10); 
+insert into lib1 values(2,'toc', 'mr.mohite',15); 
+insert into lib1 values(3,'dbms', 'mr.dhumal',12); 
+select * from lib1;
+
+create table lib1_audit(bno number(10), old_allowed_days number(10), new_allowed_days number(10));
+
+SQL> create or replace trigger trg1
+    before update or delete on lib1
+    for each row
+    begin
+    insert into lib1_audit values(:new.bno, :old.allowed_days, :new.allowed_days);
+    end;
+    /
+
+update lib1 set allowed_days=13 where bno=1;
+select * from lib1;  
+select * from lib1_audit;
+
+delete from lib1 where bno=2;
+select * from lib1;
+select * from lib1_audit;
+
+
+
+
+
