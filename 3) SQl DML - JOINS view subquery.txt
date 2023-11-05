@@ -1,0 +1,26 @@
+3) SQl DML - Joins subquery view
+
+use t;
+create table book(book_id int, book_name varchar(10), author varchar(10), publisher varchar(10));
+desc book;
+
+insert into book (book_id, book_name, author, publisher) values (1001,'DBMS','korth','MCGrawhili'), (1002,'SSPM','pressman','addison'), (1003,'ISEE','Rahul de','wileyindia');
+select * from book;
+
+create table stud(roll_no int, name varchar(10), book_name varchar(10));
+
+insert into stud (roll_no, name, book_name) values (1,'Madhu','DBMS'), (2,'vidha','SSPM'),(3,'sita','ISEE');
+select * from stud;
+
+select book.book_id, author from book inner join stud on book.book_name = stud.book_name;
+
+select book.book_id, book.book_name, book.author, stud.roll_no, stud.name from book left outer join stud on book.book_name = stud.book_name;
+
+select book.book_id, book.book_name, stud.roll_no from book right outer join stud on book.book_name = stud.book_name;
+
+create view v2 as select roll_no, book_id, name from book, stud;
+select * from v2;
+
+select book_name from book where book_id = (select book_id where author= 'korth');
+
+
